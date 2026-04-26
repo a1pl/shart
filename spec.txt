@@ -109,6 +109,8 @@ functions:
 fn to define a function
 return in a function returns (durrrr)
 
+
+unicode stuff: TODO
 dicts:
 its just a list but the compiler/interpreter knows if it sees : in it
 empty dict is (:)
@@ -187,3 +189,14 @@ try [
 ] catch (the type of error here, not necessary) as n [
 
 ]
+
+errortypes:
+TypeError - incorrect type given/used, does include conversion with floats and allat too
+ImportError - import failure
+RangeError - param/number is outside its range
+SyntaxError - syntax error like 2 semicolons
+ArithmeticError - math error
+ModuleNotFoundError - module not foundn error
+NameError - variable name not found
+OverflowError - overflow
+UnicodeError - unicode error with like what text standard youre using
