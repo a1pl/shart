@@ -149,6 +149,7 @@ int() - returns int if string is a number
 float() same as int but floats
 bool() - to bool if "true" or "false"
 + can concat in strings without getting evald because thats like an "arithmetic" operation to the interpreter
+special character before / isnt parsed outside of a string so you could do "he said "/hi"/" and it would be a string
 
 int utils:
 string() -to string
