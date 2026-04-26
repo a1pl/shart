@@ -180,3 +180,10 @@ priority order in concat, top to bottom:
 string
 bool
 int
+
+
+try [
+
+] catch (the type of error here, not necessary) as n [
+
+]
