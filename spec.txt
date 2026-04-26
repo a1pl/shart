@@ -10,10 +10,16 @@ while true [
 ];
 
 
+hi.txt contains h, variable1 = "h"
+set {variable1} = 1
+
 let creates,
 set creates and updates,
 AND const is let as a constant var that cant be changed
 
+
+while is like this:
+while {i < 10} [...]
 
 {} is kind of like eval, yk?
 as seen above, if we can assume hi.txt contains hi and hello.txt contains hello, you just created two variables called hi and hello that are equal to 1
