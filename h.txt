@@ -1,0 +1,182 @@
+shartlang spec
+code:
+let io = import(f"{packages.store()}/io");
+let files = ("hi.txt", "hello.txt");
+while true [
+    iterate files as n [
+        let variable = io.read(line:1, type:string, file:n);
+        set {variable} = 1;
+    ];
+];
+
+
+let creates,
+set creates and updates,
+AND const is let as a constant var that cant be changed
+
+
+{} is kind of like eval, yk?
+as seen above, if we can assume hi.txt contains hi and hello.txt contains hello, you just created two variables called hi and hello that are equal to 1
+
+packages stuff:
+theres gonna  be a registry internally from where the interpreter can gather exported functions from each module.
+interpreter has utilities for registry
+packages.store() returns folder containing packages or online path if its on the internet as a single shart file
+import() is a compiler hint essentially for the interpreter to check and run (mayb compile even) io.yapyapyap functions against that package
+packages.list() lists all packages in a dict with package names @ their version and a path
+packages.source() is the same as packages.list but it shows where a package was downloaded from like its online path or smthn idk yet
+
+variable overwriting exists
+
+other types?
+
+
+{} is not required for bare idents, literals, arithmetic, comparisons
+file handling:
+if code wants file.txt, it does ig.
+if code tries to access line 1 of file.txt, file gets opened and line 1 is given.
+lines and io are like reactive stuff in svelte where it gets changed as needed through the lifecycle and its just a string to code.
+reactive aka:
+let file = who cares
+let x = file.read(line:1, type:string);
+set x = "hi"
+
+true can be .int() into 1, false is 0
+1 can be .bool() to true, you get the idea
+if a number like 67 gets .bool()'d, it throws an error
+
+
+0 indexed btw
+
+yap:
+== is bool, true or false
+< and > for comparisons, bool result like the later defined &&
+
+example code:
+let console = import(f"{packages.store()}/console");
+let x = 1;
+
+if {x == 1} [
+    console.log("x is 1 guys, we can all go home now");
+] elif {x == 1 && true == true} and {true == true}[
+    console.log("guys x isnt 1");
+];
+
+tuples do NOT exist.
+just use const on a list
+
+more stuff:
+
+% is modulo
++= compound assign, modulo, divide, subtract, and add compounds exist too
+=.method() compound assign 
+// comments
+; is optional now
+<= and >= exist now
+
+
+iterate LIST as VARIABLE [body], this works with evals in the list argument ofc
+slash in an if statement is elif, but without the el in elif so it just runs seperately
+else depends on all if/slash/and/or in the if statement being false
+let overwrite ofc
+
+and is in if statements and is meant to be seen as a conditional for functions and stuff idr but its tuff and readable
+&& is like if you want boolean operations that return a boolean, but its just and for general non if statement code
+
+same thing like that happens with || and or
+same with != and not too
+
+range(start, end) is exclusive
+builtin module exists no import
+builtin.typeString and friends exist
+assume(type) returns typed null, typeString from builtin is ""
+console.input(prompt) returns string
+console.log(value) prints
+list.append(item) return list with item appended to it
+
+js like variable type transformations
+string to int in math
+
+uhh like python you put f before string you can use {} as evals in it
+
+if you have a method function whatever that wants an int and you want to pass it the output of some other method, just use the {} eval obviously
+
+assume is only used for module apis, or just for readable code if ur a nerddd, also like typescript like stuff with filetypes being used in fn decleration inputs
+assume(builtin.typeList) literally just returns () also yet again i forgot to wrap it in {} in fizzbuzz, now fixed
+
+functions:
+
+fn to define a function
+return in a function returns (durrrr)
+
+dicts:
+its just a list but the compiler/interpreter knows if it sees : in it
+empty dict is (:)
+dot functions for dicts AND lists include
+
+for lists, key is just the order of that value in the list but as a string to keep parity with dict functions, will be auto converted js style anyways
+get(builtin.typeString) returns value obviously
+set(builtin.typeString, value) sets key to val, look at set/let diff
+let(builtin.typeString, value) lets key to val, look at set/let diff
+has(builtin.typeString)
+delete(builtin.typeString) deletes value in list, deletes whole pair in dict
+before(builtin.typeString) splits to list of two lists, one before builtin:typeString one containing
+after(builtin.typeString) splits to list of two lists, one after key one containing
+len() returns length, or how many pairs/list values there are
+string() turns into strirng
+
+TODO, add sort reverse and slicing
+
+dict only:
+keys() returns list of keys
+values() returns list of values 
+pairs() returns of lists inside lists
+
+list only:
+dict() - uhh turns all objects in list into key value pair with keys being number order thingy yk?
+
+
+iterate wants a list so dict will throw a type error or whatever im calling it\
+
+
+string utilities:
+split(delim:builtin.typeString) - splits into list of characters/words, splits all chars by default
+len() - length
+contains(letter:builtin.typeString) - returns bool
+int() - returns int if string is a number
+float() same as int but floats
+bool() - to bool if "true" or "false"
++ can concat in strings without getting evald because thats like an "arithmetic" operation to the interpreter
+
+int utils:
+string() -to string
+float() - to float
+bool() - to bool, documents higher up
+TODO
+
+builtin.typeType is a type of a type, such as typeInt or typeString, which are typeTypes btw
+
+
+
+io, all this assumes you imported io:
+write(file:io.typeFile, line:builtin.typeInt, value:builtin.typeString)
+append(file:io.typeFile, line:builtin.typeInt, value:builtin.typeString)
+delete(file:io.typeFile) - deletes file
+deleteText(file:io.typeFile, line:builtin.typeInt, start:builtin.typeInt, end:builtin.typeInt) -- inclusive end
+deleteLine(file:io.typeFile, line:builtin.typeInt) - deletes line
+exists(file:io.typeFile,  line:builtin.typeInt) - returns bool of if file exists if no line provided, returns bool of if line exists if line argument is passed
+lineCount(file:io.typeFile) - returns int of total lines
+read(file:io.typeFile, line:builtin.typeInt, type:builtin.typeType)
+readAll(file:io.typeFile, type:builtin.typeType) - returns list with each line of file as an object if type type: param
+create(value:builtin.typeString) returns file:io.typeFile, creates a file
+
+
+
+concatenation mayhaps:
+"5"+1 is "51"
+1+true is 2
+
+priority order in concat, top to bottom:
+string
+bool
+int

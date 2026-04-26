@@ -1,0 +1,19 @@
+let console = import(f"{packages.store()}/console") 
+let x = {console.input("numbah:")}
+let result = ()
+iterate {range(0, x +1)} as n [
+    let res = {assume(builtin.typeString)} // resets res, its just "" but for showcase yappery
+    if {n % 3 == 0} [
+        set res += "fizz";
+    ] slash {n % 5 == 0} [ // cuz slash is and+or, get it??????? hahahaha im so funni guys
+        set res += "buzz";
+    ] else [
+        set res += n; // auto converted to string, js like
+    ]
+    set result =.append(res); // hi =.int() is the same thing as hi = hi.int()
+];
+
+iterate result as n [
+    console.log(n)
+]
+// also semicolons are optional now, im lazy
