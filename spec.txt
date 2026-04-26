@@ -115,13 +115,13 @@ empty dict is (:)
 dot functions for dicts AND lists include
 
 for lists, key is just the order of that value in the list but as a string to keep parity with dict functions, will be auto converted js style anyways
-get(builtin.typeString) returns value obviously
-set(builtin.typeString, value) sets key to val, look at set/let diff
-let(builtin.typeString, value) lets key to val, look at set/let diff
-has(builtin.typeString)
-delete(builtin.typeString) deletes value in list, deletes whole pair in dict
-before(builtin.typeString) splits to list of two lists, one before builtin:typeString one containing
-after(builtin.typeString) splits to list of two lists, one after key one containing
+get(key:builtin.typeString) returns value obviously
+set(key:builtin.typeString, value) sets key to val, look at set/let diff
+let(key:builtin.typeString, value) lets key to val, look at set/let diff
+has(key:builtin.typeString)
+delete(key:builtin.typeString) deletes value in list, deletes whole pair in dict
+before(key:builtin.typeString) splits to list of two lists, one before builtin:typeString one containing
+after(key:builtin.typeString) splits to list of two lists, one after key one containing
 len() returns length, or how many pairs/list values there are
 string() turns into strirng
 
